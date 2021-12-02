@@ -2,9 +2,10 @@ import lib
 import re
 
 class Uboot:
-    depth = 0
-    lateral_position = 0
-    aim = 0
+    def __init__(self):
+        self.depth = 0
+        self.lateral_position = 0
+        self.aim = 0
 
     def change_position(self, direction, speed):
         if direction == "forward":
@@ -24,9 +25,8 @@ matches = [(dir, int(dist)) for (dir, dist) in re.findall(r'(\w+) (\d+)', list)]
 uboot = Uboot()
 
 for i in range(len(matches)):
-    uboot.direction(matches[i][0], matches[i][1])
+    uboot.change_position(matches[i][0], matches[i][1])
     
-
 result = uboot.depth * uboot.lateral_position
 
 print(result)
