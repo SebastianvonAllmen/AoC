@@ -1,30 +1,37 @@
 import lib
 import re
 
+class Uboot:
+    depth = 0
+    lateral_position = 0
+    aim = 0
+
+    def change_position(self, direction, speed):
+        if direction == "forward":
+            self.lateral_position += speed
+            self.depth += self.aim * speed
+
+        if direction == "up":
+            self.aim -= speed
+
+        if direction == "down":
+            self.aim += speed
+
 list = lib.input_as_string("input2.txt")
 
 matches = [(dir, int(dist)) for (dir, dist) in re.findall(r'(\w+) (\d+)', list)]
 
-h = 0
-lateral = 0
-aim = 0
-
-
+uboot = Uboot()
 
 for i in range(len(matches)):
-    if matches[i][0] == "forward":
-        lateral += matches[i][1]
-        h += aim * matches[i][1]
+    uboot.direction(matches[i][0], matches[i][1])
+    
 
-    if matches[i][0] == "up":
-        aim -= matches[i][1]
-
-    if matches[i][0] == "down":
-        aim += matches[i][1]
-
-result = h * lateral
+result = uboot.depth * uboot.lateral_position
 
 print(result)
+
+
 
 
 
