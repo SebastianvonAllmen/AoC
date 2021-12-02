@@ -1,6 +1,7 @@
 import lib
 import re
 
+
 class Uboot:
     def __init__(self):
         self.depth = 0
@@ -18,21 +19,17 @@ class Uboot:
         if direction == "down":
             self.aim += speed
 
+
 list = lib.input_as_string("input2.txt")
 
-matches = [(dir, int(dist)) for (dir, dist) in re.findall(r'(\w+) (\d+)', list)]
+matches = [(dir, int(dist))
+           for (dir, dist) in re.findall(r'(\w+) (\d+)', list)]
 
 uboot = Uboot()
 
 for i in range(len(matches)):
     uboot.change_position(matches[i][0], matches[i][1])
-    
+
 result = uboot.depth * uboot.lateral_position
 
 print(result)
-
-
-
-
-
-
