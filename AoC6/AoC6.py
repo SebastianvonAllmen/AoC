@@ -1,22 +1,24 @@
 from lib import *
 import re
 
-input = input_as_string("input6.txt")
+REBIRTH_RATE = 7
+fishage = [0] * 9
 
+def solve(fishagetable, days):
+    for _ in range(days):
+        zero = fishagetable[0]
+        fishagetable[0:8] = fishagetable[1:]
+        fishagetable[REBIRTH_RATE-1] += zero
+        fishagetable[REBIRTH_RATE+1] = zero
+    return sum(fishagetable)
+
+input = input_as_string("input6.txt")
 numbers = list(map(int, re.findall(r'(\d+)', input)))
 
-REBIRTH_RATE = 7
-DAYS = 256
+for number in numbers:
+    fishage[number] += 1 
 
-# Simulate the amount of days
-for i in range(1, DAYS):
-    # here we deduct
-    numbers = [members - 1 for members in numbers]
-    # Step through every member of list
-    for j in range(len(numbers)):
-        # if days == 0 a new member is born
-        if numbers[j] == 0:
-            numbers[j] = REBIRTH_RATE
-            numbers.append(REBIRTH_RATE+2)
+fishage2 = fishage.copy()
 
-print(len(numbers))
+print(solve(fishage, 80))
+print(solve(fishage2, 256))
