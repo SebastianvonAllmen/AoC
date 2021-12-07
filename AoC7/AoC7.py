@@ -13,12 +13,11 @@ def middle_element(lst):
 input = input_as_string("input7.txt")
 numbers = list(map(int, re.findall(r'(\d+)', input)))
 
-#find most commen element of list
-fuel = 0
-
+#find middle element of list
 numbers.sort()
 target = int(middle_element(numbers))
 
+fuel = 0
 #Calculate all the fuel needed
 for i in range(len(numbers)):
     fuel += calculatefuel(numbers[i], target)
